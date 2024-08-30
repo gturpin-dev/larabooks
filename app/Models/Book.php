@@ -5,11 +5,13 @@ namespace App\Models;
 use App\Models\Author;
 use App\Models\Comment;
 use WendellAdriel\Lift\Lift;
+use Spatie\Sluggable\HasSlug;
 use WendellAdriel\Lift\Attributes\DB;
 use Illuminate\Database\Eloquent\Model;
 use WendellAdriel\Lift\Attributes\PrimaryKey;
 use WendellAdriel\Lift\Attributes\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\Sluggable\SlugOptions;
 use WendellAdriel\Lift\Attributes\Relations\BelongsToMany;
 
 #[DB(timestamps: true)]
@@ -19,6 +21,7 @@ class Book extends Model
 {
     use HasFactory;
     use Lift;
+    use HasSlug;
 
     #[PrimaryKey]
     public int $id;
@@ -35,4 +38,17 @@ class Book extends Model
     public float $price;
 
     public string $description;
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug')
+            ->usingSeparator('-');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
