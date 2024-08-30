@@ -10,10 +10,11 @@ use Illuminate\Database\Eloquent\Model;
 use WendellAdriel\Lift\Attributes\PrimaryKey;
 use WendellAdriel\Lift\Attributes\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use WendellAdriel\Lift\Attributes\Relations\BelongsToMany;
 
 #[DB(timestamps: true)]
-#[HasMany(Author::class)]
 #[HasMany(Comment::class)]
+#[BelongsToMany(Author::class)]
 class Book extends Model
 {
     use HasFactory;
