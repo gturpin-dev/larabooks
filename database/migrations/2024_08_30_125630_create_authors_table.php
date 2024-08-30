@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('biography');
-            $table->timestamp('birthdate');
+            $table->text('biography');
+            $table->date('birthdate');
             $table->string('nationality');
             $table->timestamps();
         });

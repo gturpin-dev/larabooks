@@ -9,6 +9,7 @@ use WendellAdriel\Lift\Attributes\DB;
 use Illuminate\Database\Eloquent\Model;
 use WendellAdriel\Lift\Attributes\PrimaryKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use WendellAdriel\Lift\Attributes\Cast;
 use WendellAdriel\Lift\Attributes\Relations\BelongsToMany;
 
 #[DB(timestamps: true)]
@@ -25,6 +26,7 @@ class Author extends Model
 
     public string $biography;
 
+    #[Cast('immutable_date')]
     public CarbonImmutable $birthdate;
 
     public string $nationality;

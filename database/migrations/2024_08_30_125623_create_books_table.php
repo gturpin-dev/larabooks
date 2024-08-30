@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('isbn');
             $table->string('genre');
             $table->float('price');
-            $table->string('description');
+            $table->text('description');
             $table->timestamps();
         });
     }
