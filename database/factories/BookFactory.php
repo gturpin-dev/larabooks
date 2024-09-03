@@ -23,10 +23,9 @@ class BookFactory extends Factory
             'title' => fake()->name(),
             'isbn'  => fake()->isbn13(),
             'genre' => fake()->word(),
-            'price' => fake()->randomFloat(
-                nbMaxDecimals: 2,
-                min          : 10,
-                max          : 100
+            'price' => fake()->randomNumber(
+                nbDigits: 4,
+                strict  : true,
             ),
             'description' => fake()->paragraph(),
         ];

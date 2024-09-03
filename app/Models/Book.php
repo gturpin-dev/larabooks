@@ -12,6 +12,7 @@ use WendellAdriel\Lift\Attributes\PrimaryKey;
 use WendellAdriel\Lift\Attributes\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Sluggable\SlugOptions;
+use WendellAdriel\Lift\Attributes\Fillable;
 use WendellAdriel\Lift\Attributes\Relations\BelongsToMany;
 
 #[DB(timestamps: true)]
@@ -26,17 +27,22 @@ class Book extends Model
     #[PrimaryKey]
     public int $id;
 
+    #[Fillable]
     public string $title;
 
     /**
      * International Standard Book Number
      */
+    #[Fillable]
     public string $isbn;
 
+    #[Fillable]
     public string $genre;
 
-    public float $price;
+    #[Fillable]
+    public int $price;
 
+    #[Fillable]
     public string $description;
 
     public function getSlugOptions(): SlugOptions

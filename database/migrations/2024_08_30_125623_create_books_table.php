@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('isbn');
             $table->string('genre');
-            $table->float('price');
+            $table->integer('price'); // in cents
             $table->text('description');
             $table->timestamps();
         });
