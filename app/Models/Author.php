@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 use WendellAdriel\Lift\Attributes\PrimaryKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use WendellAdriel\Lift\Attributes\Cast;
+use WendellAdriel\Lift\Attributes\Fillable;
 use WendellAdriel\Lift\Attributes\Relations\BelongsToMany;
 
 #[DB(timestamps: true)]
@@ -22,12 +23,16 @@ class Author extends Model
     #[PrimaryKey]
     public int $id;
 
+    #[Fillable]
     public string $name;
 
+    #[Fillable]
     public string $biography;
 
     #[Cast('immutable_date')]
+    #[Fillable]
     public CarbonImmutable $birthdate;
 
+    #[Fillable]
     public string $nationality;
 }
