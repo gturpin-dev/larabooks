@@ -16,7 +16,7 @@ class BookSeeder extends Seeder
     public function run(): void
     {
         Book::factory()
-            ->count(3)
+            ->count(30)
             ->create()
             ->each( function (Book $book) {
                 $book->authors()->attach(
