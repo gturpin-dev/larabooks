@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\BookExporter;
 use Filament\Forms;
 use App\Models\Book;
 use Filament\Tables;
@@ -17,6 +18,9 @@ use Filament\Infolists\Components\TextEntry;
 use App\Filament\Resources\BookResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\BookResource\RelationManagers;
+use Filament\Actions\Exports\Enums\ExportFormat;
+use Filament\Tables\Actions\ExportAction;
+use Filament\Tables\Actions\ExportBulkAction;
 use Pelmered\FilamentMoneyField\Tables\Columns\MoneyColumn;
 use Pelmered\FilamentMoneyField\Forms\Components\MoneyInput;
 use Pelmered\FilamentMoneyField\Infolists\Components\MoneyEntry;
@@ -78,6 +82,13 @@ class BookResource extends Resource
             ->filters([
                 //
             ])
+            ->headerActions([
+                ExportAction::make()
+                    ->exporter(BookExporter::class)
+                    ->formats([
+                        ExportFormat::Csv,
+                    ])
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(),
@@ -85,6 +96,11 @@ class BookResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
+                    ExportBulkAction::make()
+                        ->exporter(BookExporter::class)
+                        ->formats([
+                            ExportFormat::Csv,
+                        ]),
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
