@@ -11,27 +11,29 @@ use Filament\Support\RawJs;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Support\Colors\Color;
+use Filament\Forms\Components\Grid;
+use Filament\Tables\Filters\Filter;
+use Filament\Forms\Components\Select;
 use App\Filament\Exports\BookExporter;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Actions\ExportAction;
+use Filament\Tables\Filters\QueryBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Tables\Actions\ExportBulkAction;
 use App\Filament\Resources\BookResource\Pages;
 use Filament\Actions\Exports\Enums\ExportFormat;
+use Filament\Infolists\Components\KeyValueEntry;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\BookResource\RelationManagers;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Section;
-use Filament\Tables\Enums\FiltersLayout;
-use Filament\Tables\Filters\Filter;
-use Filament\Tables\Filters\QueryBuilder;
-use Filament\Tables\Filters\QueryBuilder\Constraints\NumberConstraint;
 use Pelmered\FilamentMoneyField\Tables\Columns\MoneyColumn;
 use Pelmered\FilamentMoneyField\Forms\Components\MoneyInput;
 use Pelmered\FilamentMoneyField\Infolists\Components\MoneyEntry;
+use Filament\Tables\Filters\QueryBuilder\Constraints\NumberConstraint;
 
 class BookResource extends Resource
 {
@@ -77,6 +79,12 @@ class BookResource extends Resource
                             ->columnSpan(2),
                     ])
                     ->columnSpanFull(),
+
+                Select::make('authors')
+                    ->multiple()
+                    ->relationship(titleAttribute: 'name')
+                    ->required()
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -85,7 +93,9 @@ class BookResource extends Resource
         return $infolist
             ->schema([
                 TextEntry::make('title'),
-                TextEntry::make('isbn'),
+                TextEntry::make('isbn')
+                    ->badge()
+                    ->color(Color::Blue),
                 TextEntry::make('description'),
                 TextEntry::make('genre')
                     ->badge(),
@@ -94,6 +104,9 @@ class BookResource extends Resource
                         currency: 'EUR',
                         locale  : 'fr_FR'
                     ),
+                TextEntry::make('authors.name')
+                    ->badge()
+                    ->columnSpanFull()
             ]);
     }
 
@@ -115,10 +128,12 @@ class BookResource extends Resource
                     ->sortable(),
                 TextColumn::make('comments_count')
                     ->label('Comments')
-                    ->counts('comments'),
+                    ->counts('comments')
+                    ->sortable(),
                 TextColumn::make('authors_count')
                     ->counts('authors')
-                    ->label('Authors'),
+                    ->label('Authors')
+                    ->sortable(),
             ])
             ->filters([
                 Filter::make('price')
