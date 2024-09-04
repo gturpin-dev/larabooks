@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\CommentResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CommentResource\RelationManagers;
+use App\Models\Book;
 use Filament\Infolists\Components\TextEntry;
 
 class CommentResource extends Resource
@@ -22,6 +23,10 @@ class CommentResource extends Resource
     protected static ?string $model = Comment::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
+
+    protected static ?string $navigationParentItem = 'Books';
+
+    protected static ?string $navigationGroup = 'Resources';
 
     public static function canCreate(): bool
     {

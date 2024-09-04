@@ -23,6 +23,10 @@ class AuthorResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
+    protected static ?string $navigationParentItem = 'Books';
+
+    protected static ?string $navigationGroup = 'Resources';
+
     public static function form(Form $form): Form
     {
         return $form
