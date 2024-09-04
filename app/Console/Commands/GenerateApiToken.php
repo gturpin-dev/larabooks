@@ -43,5 +43,5 @@ class GenerateApiToken extends Command
         $this->info('Token: ' . $token);
 
         return Command::SUCCESS;
-    }et c'ce
+    }
 }
