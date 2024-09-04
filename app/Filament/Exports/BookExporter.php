@@ -20,8 +20,7 @@ class BookExporter extends Exporter
             ExportColumn::make('slug'),
             ExportColumn::make('isbn'),
             ExportColumn::make('genre'),
-            ExportColumn::make('price')
-                ->formatStateUsing(),
+            ExportColumn::make('price'),
             ExportColumn::make('description'),
             ExportColumn::make('created_at'),
             ExportColumn::make('updated_at'),

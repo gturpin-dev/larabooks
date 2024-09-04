@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Casts\MoneyCast;
 use App\Models\Author;
 use App\Models\Comment;
 use WendellAdriel\Lift\Lift;
@@ -12,6 +13,7 @@ use WendellAdriel\Lift\Attributes\PrimaryKey;
 use WendellAdriel\Lift\Attributes\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Spatie\Sluggable\SlugOptions;
+use WendellAdriel\Lift\Attributes\Cast;
 use WendellAdriel\Lift\Attributes\Fillable;
 use WendellAdriel\Lift\Attributes\Relations\BelongsToMany;
 
@@ -40,7 +42,8 @@ class Book extends Model
     public string $genre;
 
     #[Fillable]
-    public int $price;
+    #[Cast(MoneyCast::class)]
+    public float $price;
 
     #[Fillable]
     public string $description;
