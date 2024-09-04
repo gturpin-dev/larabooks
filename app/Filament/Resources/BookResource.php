@@ -25,6 +25,10 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\BookResource\RelationManagers;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\QueryBuilder;
+use Filament\Tables\Filters\QueryBuilder\Constraints\NumberConstraint;
 use Pelmered\FilamentMoneyField\Tables\Columns\MoneyColumn;
 use Pelmered\FilamentMoneyField\Forms\Components\MoneyInput;
 use Pelmered\FilamentMoneyField\Infolists\Components\MoneyEntry;
@@ -85,7 +89,11 @@ class BookResource extends Resource
                 TextEntry::make('description'),
                 TextEntry::make('genre')
                     ->badge(),
-                MoneyEntry::make('price')
+                TextEntry::make('price')
+                    ->money(
+                        currency: 'EUR',
+                        locale  : 'fr_FR'
+                    ),
             ]);
     }
 
@@ -107,7 +115,36 @@ class BookResource extends Resource
                     ->sortable(),
             ])
             ->filters([
-                //
+                Filter::make('price')
+                    ->form([
+                        TextInput::make('from')
+                            ->label('Price From')
+                            ->numeric()
+                            ->step(0.01)
+                            ->placeholder('9.99')
+                            ->helperText('Price in euros (€) e.g. 9.99')
+                            ->suffixIcon('heroicon-o-currency-euro')
+                            ->suffixIconColor(Color::Green)
+                            ->debounce(),
+                        TextInput::make('to')
+                            ->label('Price To')
+                            ->numeric()
+                            ->step(0.01)
+                            ->placeholder('9.99')
+                            ->helperText('Price in euros (€) e.g. 9.99')
+                            ->suffixIcon('heroicon-o-currency-euro')
+                            ->suffixIconColor(Color::Green)
+                            ->debounce(),
+                    ])
+                    ->query( function (Builder $query, array $data) {
+                        return $query
+                            ->when( $data['from'], function (Builder $query, ?string $from) {
+                                return $query->where('price', '>=', $from * 100);
+                            })
+                            ->when( $data['to'], function (Builder $query, ?string $to) {
+                                return $query->where('price', '<=', $to * 100);
+                            });
+                    } )
             ])
             ->headerActions([
                 ExportAction::make()
