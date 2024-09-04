@@ -113,6 +113,12 @@ class BookResource extends Resource
                         locale  : 'fr_FR'
                     )
                     ->sortable(),
+                TextColumn::make('comments_count')
+                    ->label('Comments')
+                    ->counts('comments'),
+                TextColumn::make('authors_count')
+                    ->counts('authors')
+                    ->label('Authors'),
             ])
             ->filters([
                 Filter::make('price')
