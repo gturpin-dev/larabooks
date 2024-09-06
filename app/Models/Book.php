@@ -2,24 +2,35 @@
 
 namespace App\Models;
 
-use App\Casts\MoneyCast;
 use App\Models\Author;
 use App\Models\Comment;
+use App\Casts\MoneyCast;
 use WendellAdriel\Lift\Lift;
 use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use WendellAdriel\Lift\Attributes\DB;
 use Illuminate\Database\Eloquent\Model;
+use WendellAdriel\Lift\Attributes\Cast;
+use WendellAdriel\Lift\Attributes\Fillable;
 use WendellAdriel\Lift\Attributes\PrimaryKey;
 use WendellAdriel\Lift\Attributes\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\Sluggable\SlugOptions;
-use WendellAdriel\Lift\Attributes\Cast;
-use WendellAdriel\Lift\Attributes\Fillable;
 use WendellAdriel\Lift\Attributes\Relations\BelongsToMany;
 
 #[DB(timestamps: true)]
 #[HasMany(Comment::class)]
 #[BelongsToMany(Author::class)]
+#[ApiResource(
+    paginationEnabled     : true,
+    paginationItemsPerPage: 10,
+    operations            : [
+        new GetCollection(),
+        new Get(),
+    ]
+)]
 class Book extends Model
 {
     use HasFactory;
