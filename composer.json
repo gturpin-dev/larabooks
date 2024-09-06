@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "api-platform/laravel": "^4@alpha",
         "filament/filament": "^3.2",
         "laravel/framework": "^11.9",
         "laravel/prompts": "^0.1.25",
