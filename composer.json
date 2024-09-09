@@ -6,13 +6,12 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "api-platform/laravel": "^4@alpha",
+        "api-platform/laravel": "dev-main",
         "filament/filament": "^3.2",
         "laravel/framework": "^11.9",
         "laravel/prompts": "^0.1.25",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
-        "pelmered/filament-money-field": "^1.4",
         "spatie/laravel-sluggable": "^3.6",
         "wendelladriel/laravel-lift": "^0.14.1"
     },
@@ -68,6 +67,6 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }

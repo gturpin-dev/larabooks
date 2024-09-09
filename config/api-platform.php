@@ -1,26 +1,17 @@
 <?php
 
-/*
- * This file is part of the API Platform project.
- *
- * (c) Kévin Dunglas <dunglas@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-declare(strict_types=1);
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 
 return [
     'title' => 'API Platform',
     'description' => 'My awesome API',
     'version' => '1.0.0',
 
-    /*
-     *  Automatic registration of routes will only happen if this setting is `true`
-     */
-    'register_routes' => true,
-    'prefix' => '/api',
+    'routes' => [
+        'prefix' => '/api',
+        'middleware' => [],
+    ],
 
     /*
      * Where are ApiResource defined
@@ -31,8 +22,8 @@ return [
     ],
 
     'formats' => [
-        'jsonld' => ['application/ld+json'],
         'jsonapi' => ['application/vnd.api+json'],
+        'jsonld' => ['application/ld+json'],
     ],
 
     'patch_formats' => [
@@ -40,9 +31,9 @@ return [
     ],
 
     'docs_formats' => [
-        'jsonopenapi' => ['application/vnd.openapi+json'],
-        'json' => ['application/json'],
+        'jsonapi' => ['application/vnd.api+json'],
         'jsonld' => ['application/ld+json'],
+        'jsonopenapi' => ['application/vnd.openapi+json'],
         'html' => ['text/html'],
     ],
 
@@ -68,4 +59,19 @@ return [
             'parameter_name' => 'order',
         ],
     ],
+
+    'graphql' => [
+        'enabled' => false,
+        'nesting_separator' => '__',
+        'introspection' => ['enabled' => true]
+    ],
+
+    'exception_to_status' => [
+        AuthenticationException::class => 401,
+        AuthorizationException::class => 403
+    ],
+
+    'swagger_ui' => [
+        'enabled' => true
+    ]
 ];
