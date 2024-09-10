@@ -22,17 +22,21 @@ use WendellAdriel\Lift\Attributes\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use WendellAdriel\Lift\Attributes\Relations\BelongsToMany;
 use ApiPlatform\Laravel\Eloquent\Filter\PartialSearchFilter;
+use ApiPlatform\Metadata\Post;
+use App\Http\Requests\CreateBookRequest;
 
 #[DB(timestamps: true)]
 #[HasMany(Comment::class)]
 #[BelongsToMany(Author::class)]
 #[ApiResource(
     middleware            : 'auth:sanctum',
+    rules                 : CreateBookRequest::class,
     paginationEnabled     : true,
     paginationItemsPerPage: 10,
     operations            : [
         new GetCollection(),
         new Get(),
+        new Post()
     ]
 )]
 #[QueryParameter(
