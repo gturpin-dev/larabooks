@@ -153,10 +153,10 @@ class BookResource extends Resource
                     ->query( function ( Builder $query, array $data ) {
                         return $query
                             ->when( $data['from'], function ( Builder $query, ?string $from ) {
-                                return $query->where( 'price', '>=', $from * 100 );
+                                return $query->where( 'price', '>=', (float) $from * 100 );
                             } )
                             ->when( $data['to'], function ( Builder $query, ?string $to ) {
-                                return $query->where( 'price', '<=', $to * 100 );
+                                return $query->where( 'price', '<=', (float) $to * 100 );
                             } );
                     } ),
             ] )
