@@ -22,11 +22,11 @@ class CreateBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'       => [ 'required', 'string', 'max:255' ],
-            'isbn'        => [ 'required', 'string', 'max:255' ],
-            'genre'       => [ 'required', 'string', 'max:255' ],
-            'price'       => [ 'required', 'numeric', 'min:0' ],
-            'description' => [ 'required', 'string' ],
+            'title'       => ['required', 'string', 'max:255'],
+            'isbn'        => ['required', 'string', 'max:255'],
+            'genre'       => ['required', 'string', 'max:255'],
+            'price'       => ['required', 'numeric', 'min:0'],
+            'description' => ['required', 'string'],
         ];
     }
 }

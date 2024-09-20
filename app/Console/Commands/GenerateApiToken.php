@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Console\Command;
 
 use function Laravel\Prompts\search;
-use function Laravel\Prompts\select;
 
 class GenerateApiToken extends Command
 {
@@ -31,16 +30,16 @@ class GenerateApiToken extends Command
     {
         $user_id = search(
             label  : 'Search for the user to generate the token for',
-            options: fn (string $search) => strlen($search) > 0
-                ? User::whereLike('name', "%{$search}%")->pluck('name', 'id')->all()
+            options: fn ( string $search ) => strlen( $search ) > 0
+                ? User::whereLike( 'name', "%{$search}%" )->pluck( 'name', 'id' )->all()
                 : []
         );
 
-        $token = User::find($user_id)
-            ->createToken('api-token')
+        $token = User::find( $user_id )
+            ->createToken( 'api-token' )
             ->plainTextToken;
 
-        $this->info('Token: ' . $token);
+        $this->info( 'Token: ' . $token );
 
         return Command::SUCCESS;
     }

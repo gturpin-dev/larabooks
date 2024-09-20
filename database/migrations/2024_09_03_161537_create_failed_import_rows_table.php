@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('failed_import_rows', function (Blueprint $table) {
+        Schema::create( 'failed_import_rows', function ( Blueprint $table ) {
             $table->id();
-            $table->json('data');
-            $table->foreignId('import_id')->constrained()->cascadeOnDelete();
-            $table->text('validation_error')->nullable();
+            $table->json( 'data' );
+            $table->foreignId( 'import_id' )->constrained()->cascadeOnDelete();
+            $table->text( 'validation_error' )->nullable();
             $table->timestamps();
-        });
+        } );
     }
 
     /**
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('failed_import_rows');
+        Schema::dropIfExists( 'failed_import_rows' );
     }
 };

@@ -1,10 +1,10 @@
 <?php
 
-use App\Models\Book;
 use App\Models\Author;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
+use App\Models\Book;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('author_book', function (Blueprint $table) {
+        Schema::create( 'author_book', function ( Blueprint $table ) {
             $table->id();
 
-            $table->foreignIdFor(Author::class);
-            $table->foreignIdFor(Book::class);
-        });
+            $table->foreignIdFor( Author::class );
+            $table->foreignIdFor( Book::class );
+        } );
     }
 
     /**
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('author_book');
+        Schema::dropIfExists( 'author_book' );
     }
 };

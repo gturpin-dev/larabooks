@@ -2,17 +2,16 @@
 
 namespace App\Models;
 
-use App\Models\Book;
-use WendellAdriel\Lift\Lift;
-use WendellAdriel\Lift\Attributes\DB;
-use Illuminate\Database\Eloquent\Model;
-use WendellAdriel\Lift\Attributes\PrimaryKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use WendellAdriel\Lift\Attributes\DB;
+use WendellAdriel\Lift\Attributes\PrimaryKey;
 use WendellAdriel\Lift\Attributes\Relations\BelongsTo;
+use WendellAdriel\Lift\Lift;
 
-#[DB(timestamps: true)]
-#[BelongsTo(User::class)]
-#[BelongsTo(Book::class)]
+#[DB( timestamps: true )]
+#[BelongsTo( User::class )]
+#[BelongsTo( Book::class )]
 class Comment extends Model
 {
     use HasFactory;
@@ -20,6 +19,5 @@ class Comment extends Model
 
     #[PrimaryKey]
     public int $id;
-
     public string $content;
 }

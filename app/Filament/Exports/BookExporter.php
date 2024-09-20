@@ -14,25 +14,25 @@ class BookExporter extends Exporter
     public static function getColumns(): array
     {
         return [
-            ExportColumn::make('id')
-                ->label('ID'),
-            ExportColumn::make('title'),
-            ExportColumn::make('slug'),
-            ExportColumn::make('isbn'),
-            ExportColumn::make('genre'),
-            ExportColumn::make('price'),
-            ExportColumn::make('description'),
-            ExportColumn::make('created_at'),
-            ExportColumn::make('updated_at'),
+            ExportColumn::make( 'id' )
+                ->label( 'ID' ),
+            ExportColumn::make( 'title' ),
+            ExportColumn::make( 'slug' ),
+            ExportColumn::make( 'isbn' ),
+            ExportColumn::make( 'genre' ),
+            ExportColumn::make( 'price' ),
+            ExportColumn::make( 'description' ),
+            ExportColumn::make( 'created_at' ),
+            ExportColumn::make( 'updated_at' ),
         ];
     }
 
-    public static function getCompletedNotificationBody(Export $export): string
+    public static function getCompletedNotificationBody( Export $export ): string
     {
-        $body = 'Your book export has completed and ' . number_format($export->successful_rows) . ' ' . str('row')->plural($export->successful_rows) . ' exported.';
+        $body = 'Your book export has completed and ' . number_format( $export->successful_rows ) . ' ' . str( 'row' )->plural( $export->successful_rows ) . ' exported.';
 
-        if ($failedRowsCount = $export->getFailedRowsCount()) {
-            $body .= ' ' . number_format($failedRowsCount) . ' ' . str('row')->plural($failedRowsCount) . ' failed to export.';
+        if ( $failedRowsCount = $export->getFailedRowsCount() ) {
+            $body .= ' ' . number_format( $failedRowsCount ) . ' ' . str( 'row' )->plural( $failedRowsCount ) . ' failed to export.';
         }
 
         return $body;

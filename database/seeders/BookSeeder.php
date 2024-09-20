@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Book;
 use App\Models\Author;
+use App\Models\Book;
 use App\Models\Comment;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class BookSeeder extends Seeder
 {
@@ -16,15 +15,15 @@ class BookSeeder extends Seeder
     public function run(): void
     {
         Book::factory()
-            ->count(30)
+            ->count( 30 )
             ->create()
-            ->each( function (Book $book) {
+            ->each( function ( Book $book ) {
                 $book->authors()->attach(
-                    Author::factory()->count(rand(1, 3))->create()
+                    Author::factory()->count( rand( 1, 3 ) )->create()
                 );
 
                 $book->comments()->createMany(
-                    Comment::factory()->count(rand(0, 5))->make()->toArray()
+                    Comment::factory()->count( rand( 0, 5 ) )->make()->toArray()
                 );
             } );
     }
