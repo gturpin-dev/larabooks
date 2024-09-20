@@ -19,6 +19,6 @@ class UserSeeder extends Seeder
             'name'     => 'John Doe',
             'email'    => 'john@doe.fr',
             'password' => Hash::make('admin')
-        ] )
+        ] );
     }
 }
