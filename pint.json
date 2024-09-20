@@ -36,6 +36,9 @@
         },
         "single_line_empty_body": true,
         "no_unused_imports": true,
+        "whitespace_after_comma_in_array": {
+            "ensure_single_space": true
+        },
         "phpdoc_align": {
             "align": "vertical",
             "tags": [
