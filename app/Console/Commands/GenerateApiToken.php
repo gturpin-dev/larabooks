@@ -26,7 +26,7 @@ class GenerateApiToken extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): int
     {
         $user_id = search(
             label  : 'Search for the user to generate the token for',
